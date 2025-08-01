@@ -1,4 +1,11 @@
 
+
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+
 spring:
   application:
     name: account
@@ -6,8 +13,19 @@ spring:
   profiles:
     active: dev
   config:
-    import: configserver:http://localhost:8888
+    import: "optional:configserver:http://localhost:8888"
   cloud:
     config:
       username: admin
       password: qwerqwer
+  rabbitmq:
+    host: localhost
+    username: admin
+    password: password
+    port: 5672
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
